@@ -4,11 +4,5 @@ services:
     image: mongo:6-jammy
     ports:
       - '27017:27017'
-    volumes:
-      - ./dbdata6:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=mongodb
 volumes:
   dbdata6:
