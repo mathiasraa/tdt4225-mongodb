@@ -1,16 +1,14 @@
 version: "3.9"
 services:
-  mysql:
-    restart: always
-    container_name: "mysql"
-    image: mysql:8.1.0
+  mongodb:
+    image: mongo:6-jammy
     ports:
-      - 3309:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=mysql
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
+      - '27017:27017'
     volumes:
-      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./db/mysql_data:/var/lib/mysql
+      - ./dbdata6:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=mongodb
+volumes:
+  dbdata6:
