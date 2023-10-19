@@ -5,7 +5,7 @@ from .data import (
     get_labeled_ids,
 )
 
-from .connection import MySQLConnector
+from .connection import DbConnector
 
 from .haversine_np import haversine_np
 
@@ -14,6 +14,6 @@ __all__ = [
     "get_user_ids",
     "get_activities_df",
     "get_labeled_ids",
-    "MySQLConnector",
+    "DbConnector",
     "haversine_np",
 ]
