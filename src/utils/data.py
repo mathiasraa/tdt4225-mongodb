@@ -78,8 +78,52 @@ def get_activities_df(user_id: str):
         activities["id"] = ("1" + activities.index.astype(str) + user_id + "1").astype(
             int
         )
+        return activities
+    else:  # If the user has no labeled activities, use trajectory file as activity
+        rows_list = []
 
-    return activities
+        for _, _, files in os.walk(f"{data_path}/{user_id}/Trajectory"):
+            # Loop through the files in the Trajectory folder
+            for index, name in enumerate(files):
+                trajectory = pd.read_csv(
+                    f"{data_path}/{user_id}/Trajectory/{name}",
+                    names=[
+                        "latitude",
+                        "longitude",
+                        "_",
+                        "altitude",
+                        "days",
+                        "date",
+                        "time",
+                    ],
+                    sep=",",
+                    encoding="ISO-8859-1",
+                    skiprows=6,
+                )
+                if trajectory.shape[0] > 2500:
+                    continue
+
+                trajectory["date_time"] = pd.to_datetime(
+                    trajectory["date"] + " " + trajectory["time"],
+                    format="%Y-%m-%d %H:%M:%S",
+                )
+
+                start_time = trajectory["date_time"].min()
+                end_time = trajectory["date_time"].max()
+                id = int("1" + str(index) + user_id + "1")
+
+                rows_list.append([start_time, end_time, None, user_id, id])
+
+        return pd.DataFrame(
+            rows_list,
+            columns=[
+                "start_date_time",
+                "end_date_time",
+                "transportation_mode",
+                "user_id",
+                "id",
+            ],
+        )
 
 
 def get_trajectories_df(user_id: str):
@@ -110,6 +154,9 @@ def get_trajectories_df(user_id: str):
             .dt.date.astype(str)
             .values.tolist()
         ]
+
+        # Create an empty list to store selected trajectories
+        selected_trajectories = []
 
         # Loop through the files in the Trajectory folder
         for name in files:
