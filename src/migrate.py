@@ -1,5 +1,4 @@
 from bson import ObjectId
-from dataset import Database
 from pymongo import MongoClient
 from tqdm import tqdm
 from utils.data import (
@@ -12,7 +11,7 @@ from utils.connection import DbConnector
 from datetime import datetime
 
 
-def create_user_collection(client: MongoClient, db: Database):
+def create_user_collection(client: MongoClient, db):
     """
     Creates 'UserCollection' with two attributes:
     - 'id' (string)
@@ -45,7 +44,7 @@ def create_user_collection(client: MongoClient, db: Database):
     print("Created collection: \n", collection)
 
 
-def create_activity_collection(client: MongoClient, db: Database):
+def create_activity_collection(client: MongoClient, db):
     """
     Creates 'ActivityTable' SQL table with the following columns:
     - 'id' (INT AUTO_INCREMENT NOT NULL PRIMARY KEY)
@@ -244,7 +243,7 @@ def create_activity_collection(client: MongoClient, db: Database):
 #         db_connection.commit()
 
 
-def drop_tables(client: MongoClient, db: Database):
+def drop_tables(client: MongoClient, db):
     """
     Drops the specified tables from the database.
     """
