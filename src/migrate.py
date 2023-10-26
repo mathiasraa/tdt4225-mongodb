@@ -9,9 +9,10 @@ from utils.data import (
 )
 from utils.connection import DbConnector
 from datetime import datetime
+from pymongo.database import Database
 
 
-def create_user_collection(client: MongoClient, db):
+def create_user_collection(client: MongoClient, db: Database):
     """
     Creates 'UserCollection' with two attributes:
     - 'id' (string)
@@ -44,7 +45,7 @@ def create_user_collection(client: MongoClient, db):
     print("Created collection: \n", collection)
 
 
-def create_activity_collection(client: MongoClient, db):
+def create_activity_collection(client: MongoClient, db: Database):
     """
     Creates 'ActivityTable' SQL table with the following columns:
     - 'id' (INT AUTO_INCREMENT NOT NULL PRIMARY KEY)
@@ -243,7 +244,7 @@ def create_activity_collection(client: MongoClient, db):
 #         db_connection.commit()
 
 
-def drop_tables(client: MongoClient, db):
+def drop_tables(client: MongoClient, db: Database):
     """
     Drops the specified tables from the database.
     """
