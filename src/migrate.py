@@ -31,7 +31,9 @@ def create_user_collection(client: MongoClient, db: Database):
     for user in get_user_ids():
         entry = {
             "_id": user,
-            "activities": get_activities_df(user)["id"].to_list(),
+            "activities": [
+                ObjectId(f"{id:024x}") for id in get_activities_df(user)["id"].to_list()
+            ],
         }
         if user in get_labeled_ids():
             entry["has_label"] = 1
@@ -81,7 +83,7 @@ def create_activity_collection(client: MongoClient, db: Database):
                 continue
 
             entry = {
-                "_id": row["id"],
+                "_id": ObjectId(f'{row["id"]:024x}'),
                 "user": row["user_id"],
                 "start_date_time": row["start_date_time"],
                 "end_date_time": row["end_date_time"],

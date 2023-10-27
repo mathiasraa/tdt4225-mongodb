@@ -2,7 +2,7 @@ _TDT4225 — Large, Distributed Data Volumes_
 
 ## Assignment 2 — MongoDB Trajectories Database
 
-This assignment looks at an open dataset of trajectories, and the repository contains code that sets up the MySQL database together with different queries. The program is inspired by the social media workout application Strava, where users can track activities like running, walking, biking etc and post them online with stats about their workout.
+This assignment looks at an open dataset of trajectories, and the repository contains code that sets up the MongoDB database together with different queries. The program is inspired by the social media workout application Strava, where users can track activities like running, walking, biking etc and post them online with stats about their workout.
 
 ## Setup
 
