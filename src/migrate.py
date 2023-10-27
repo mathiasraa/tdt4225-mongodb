@@ -47,12 +47,14 @@ def create_user_collection(client: MongoClient, db: Database):
 
 def create_activity_collection(client: MongoClient, db: Database):
     """
-    Creates 'ActivityTable' SQL table with the following columns:
-    - 'id' (INT AUTO_INCREMENT NOT NULL PRIMARY KEY)
-    - 'user_id' (VARCHAR(255) NOT NULL FOREIGN KEY)
-    - 'start_date_time' (DATETIME)
-    - 'end_date_time' (DATETIME)
-    - 'transportation_mode' (VARCHAR(20))
+    Creates 'ActivityCollection' with five attributes:
+    - 'id' (string)
+    - 'user' (string)
+    - 'start_date_time' (datetime)
+    - 'end_date_time' (datetime)
+    - 'transportation_mode' (string)
+    - 'track_points' (list of dicts)
+
     """
 
     # Create table
